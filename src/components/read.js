@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from "react";
 import {Button, Table} from 'semantic-ui-react';
 import axios from 'axios';
-
+import Create from './create';
 
 export default function Read(){
     const [APIData, setAPIData] = useState([]);
@@ -13,12 +13,20 @@ export default function Read(){
     const [sortCriteria, setSortCriteria] = useState('name'); // Default sorting criteria
     const [sortOrder, setSortOrder] = useState('asc');
 
-    useEffect(() => {
-        axios.get(`https://652d15d2f9afa8ef4b26c279.mockapi.io/tutorials`)
+    const fetchData = async () => {
+        await axios.get(`https://652d15d2f9afa8ef4b26c279.mockapi.io/tutorials`)
         .then((response) => {
             setAPIData(response.data);
         })
-    }, [])
+    }
+
+    useEffect(() =>{
+      fetchData();
+    },[])
+
+    const onNewDataAdded = () => {
+      fetchData(); 
+    };
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -132,6 +140,9 @@ export default function Read(){
 
     return (
         <div>
+          <div>
+          <Create onNewDataAdded={onNewDataAdded} />
+          </div>
         <h2>Registered Candidates</h2>
         <label>
         Items per page:

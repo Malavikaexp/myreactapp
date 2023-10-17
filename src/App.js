@@ -6,9 +6,9 @@ function App() {
   return (
    <div className="main">
         <h1 className="main-header">TUTORIAL CANDIDATES</h1>       
-        <div>
+        {/* <div>
        <Create/> 
-        </div>         
+        </div>          */}
         <div style={{ marginTop: 20}}>
         <Read/>
         </div>            

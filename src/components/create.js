@@ -1,29 +1,39 @@
 import React from 'react';
 import { Button, Checkbox, Form } from 'semantic-ui-react';
-import { useState, useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import axios from 'axios';
 
-export default function Create() {
-    const [APIData, setAPIData] = useState([]);
+export default function Create({ onNewDataAdded }) {
+    const [APIData, setAPIData] = useState([]);;
     const [name, setName] = useState('');
     const [Qualification, setQualification] = useState('');
 
+    // useEffect(() => {
+    //     getData();
+    // }, [])
+
+    // const getData = async () => {
+    //     await axios.get(`https://652d15d2f9afa8ef4b26c279.mockapi.io/tutorials`)
+    //         .then((getData) => {
+    //              setAPIData(getData.data);
+    //          })
+    // }
+
     const postData = () => {
         axios.post(`https://652d15d2f9afa8ef4b26c279.mockapi.io/tutorials`, {
-            name : name,
-            Qualification : Qualification ,
+            name,
+            Qualification,
         })
-        .then((response) => {
-            
-            console.log('Response:', response);
-            setAPIData([...APIData, response.data]);
+        .then(() => {
+           // getData();
             setName('');
             setQualification('');
-          })
-          .catch((error) => {
-            console.error('Error adding item:', error);
-          });
+
+            onNewDataAdded();
+
+        })
     }
+
     return (
         <div style={{ marginTop: 20}}>
             <h2>Add Candidates</h2>
