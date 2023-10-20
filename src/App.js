@@ -1,5 +1,4 @@
 import './App.css';
-import Create from './components/create';
 import Read from './components/read';
 import Update from './components/update'
 import { Routes,Route } from 'react-router-dom'

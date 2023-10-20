@@ -1,5 +1,5 @@
 import React, {useEffect,useState} from "react";
-import {Button, Table} from 'semantic-ui-react';
+import {Button} from 'semantic-ui-react';
 import axios from 'axios';
 import Create from './create';
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ export default function Read(){
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [searchQuery, setSearchQuery] = useState('');
-    //const [editMode, setEditMode] = useState(false);
+    //const [editMode, setEditMode] = useState(false);           //task 1
     const [sortCriteria, setSortCriteria] = useState('name'); 
     const [sortOrder, setSortOrder] = useState('asc');
 
@@ -39,7 +39,7 @@ export default function Read(){
 
     const handleItemClick = (item) => {
         setSelectedItem(item);
-    //     setEditMode(false);
+    //     setEditMode(false);                                         //task 1
       };
       const totalItems = filteredItems.length;
       const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -60,6 +60,8 @@ export default function Read(){
       setSearchQuery(event.target.value);
       setCurrentPage(1); 
       };
+
+      //------------Task 1----------------
 
       // const toggleEditMode = () => {
       //   setEditMode(!editMode);
@@ -96,15 +98,15 @@ export default function Read(){
 
     
 
-      const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        const {Qualification, Qualificationvalue} = e.target
-        setSelectedItem({
-          ...selectedItem,
-          [name]: value,
-          [Qualification]: Qualificationvalue,
-        });
-      };
+      // const handleInputChange = (e) => {
+      //   const { name, value } = e.target;
+      //   const {Qualification, Qualificationvalue} = e.target
+      //   setSelectedItem({
+      //     ...selectedItem,
+      //     [name]: value,
+      //     [Qualification]: Qualificationvalue,
+      //   });
+      // };
     
       const handleSort = (criteria) => {
         if (criteria === sortCriteria) {
@@ -203,6 +205,9 @@ export default function Read(){
        {selectedItem && (
         <div style={{ marginTop: 20}}>
           <h2>Selected Candidate Details</h2>
+
+         {/* ---------------Task 1---------------------------------- */}
+
           {/* {editMode ? (
             <div>
               <input
@@ -223,11 +228,14 @@ export default function Read(){
             <div>
           <p>Name: {selectedItem.name}</p>
           <p>Qualification: {selectedItem.Qualification}</p>
+
+          {/* -------------------Task 1----------------- */}
+
           {/* <p>
           <button onClick={toggleEditMode}>Update</button>
           </p> */}
         </div>
-      {/* )} */}
+      {/* )} */}  
        </div>
     )} 
 

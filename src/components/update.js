@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Checkbox, Form } from 'semantic-ui-react';
+import { Button,  Form } from 'semantic-ui-react';
 import axios from "axios";
 
 export default function Update(){
