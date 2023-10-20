@@ -2,6 +2,7 @@ import React, {useEffect,useState} from "react";
 import {Button, Table} from 'semantic-ui-react';
 import axios from 'axios';
 import Create from './create';
+import { Link } from "react-router-dom";
 
 export default function Read(){
     const [APIData, setAPIData] = useState([]);
@@ -9,8 +10,8 @@ export default function Read(){
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [searchQuery, setSearchQuery] = useState('');
-    const [editMode, setEditMode] = useState(false);
-    const [sortCriteria, setSortCriteria] = useState('name'); // Default sorting criteria
+    //const [editMode, setEditMode] = useState(false);
+    const [sortCriteria, setSortCriteria] = useState('name'); 
     const [sortOrder, setSortOrder] = useState('asc');
 
     const fetchData = async () => {
@@ -38,7 +39,7 @@ export default function Read(){
 
     const handleItemClick = (item) => {
         setSelectedItem(item);
-        setEditMode(false);
+    //     setEditMode(false);
       };
       const totalItems = filteredItems.length;
       const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -60,38 +61,38 @@ export default function Read(){
       setCurrentPage(1); 
       };
 
-      const toggleEditMode = () => {
-        setEditMode(!editMode);
-      };
+      // const toggleEditMode = () => {
+      //   setEditMode(!editMode);
+      // };
     
        
     //   const setUpdateData = (data) => {
     //     console.log(data);
     //  }
 
-    const updateAPIData = (updatedItem) => {
-        axios.put(`https://652d15d2f9afa8ef4b26c279.mockapi.io/tutorials/${updatedItem.id}`, updatedItem)
-        .then((response) => {
-            if (response.status === 200) {
-              console.log('Item was updated successfully');
-            } else {
-              console.log('Error updating item:', response.data);
-            }
-            getData();
-          })
-          .catch((error) => {
-            console.error('Error updating item:', error);
-          });
+    // const updateAPIData = (updatedItem) => {
+    //     axios.put(`https://652d15d2f9afa8ef4b26c279.mockapi.io/tutorials/${updatedItem.id}`, updatedItem)
+    //     .then((response) => {
+    //         if (response.status === 200) {
+    //           console.log('Item was updated successfully');
+    //         } else {
+    //           console.log('Error updating item:', response.data);
+    //         }
+    //         getData();
+    //       })
+    //       .catch((error) => {
+    //         console.error('Error updating item:', error);
+    //       });
           
-      };
+    //   };
     
     
 
-     const handleSave = () => {
+    //  const handleSave = () => {
         
-        updateAPIData(selectedItem);
-        setEditMode(false);
-      };
+    //     updateAPIData(selectedItem);
+    //     setEditMode(false);
+    //   };
 
     
 
@@ -171,13 +172,6 @@ export default function Read(){
         <table>
         <thead>
           <tr>
-    {/* <th
-      onClick={() => handleSort('id')}
-      className={sortCriteria === 'id' ? 'sorted' : ''}
-    >
-      ID {sortCriteria === 'id' && sortOrder === 'asc' && '↑'}
-      {sortCriteria === 'id' && sortOrder === 'desc' && '↓'}
-    </th> */}
     <th
       onClick={() => handleSort('name')}
       className={sortCriteria === 'name' ? 'sorted' : ''}
@@ -191,7 +185,8 @@ export default function Read(){
           {currentItems.map((item) => (
             <tr key={item.id} >
               <td onClick={() => handleItemClick(item)}>{item.name}</td>
-              <td><Button onClick={() => onDelete(item.id)}>Delete</Button></td>
+              <td><Link to={`/update/${item.id}`}><Button color="blue">Edit</Button></Link></td>
+              <td><Button color="red" onClick={() => onDelete(item.id)}>Delete</Button></td>
             </tr>
           ))}
         </tbody>
@@ -205,10 +200,10 @@ export default function Read(){
         ))}
       </div>
 
-      {selectedItem && (
+       {selectedItem && (
         <div style={{ marginTop: 20}}>
           <h2>Selected Candidate Details</h2>
-          {editMode ? (
+          {/* {editMode ? (
             <div>
               <input
                 type="text"
@@ -224,17 +219,17 @@ export default function Read(){
               />
               <button type = 'submit' onClick={handleSave}>Save</button>
             </div>
-          ) : (
+          ) : ( */}
             <div>
           <p>Name: {selectedItem.name}</p>
           <p>Qualification: {selectedItem.Qualification}</p>
-          <p>
+          {/* <p>
           <button onClick={toggleEditMode}>Update</button>
-          </p>
+          </p> */}
         </div>
-      )}
+      {/* )} */}
        </div>
-    )}
+    )} 
 
 
      </div>

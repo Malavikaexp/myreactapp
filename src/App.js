@@ -1,6 +1,8 @@
 import './App.css';
 import Create from './components/create';
 import Read from './components/read';
+import Update from './components/update'
+import { Routes,Route } from 'react-router-dom'
 
 function App() {
   return (
@@ -10,7 +12,10 @@ function App() {
        <Create/> 
         </div>          */}
         <div style={{ marginTop: 20}}>
-        <Read/>
+        <Routes>
+        <Route path = '/' element = {<Read/>} />
+        <Route path = '/update/:id' element = {<Update/>} />
+        </Routes>
         </div>            
     </div>
       
