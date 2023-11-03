@@ -235,10 +235,16 @@ export default function Read(){
           <button onClick={toggleEditMode}>Update</button>
           </p> */}
         </div>
+        
       {/* )} */}  
        </div>
     )} 
 
+      <div>
+      <div>
+            <p><Link to = {`/cartlist`}>Go To Product List</Link></p>
+      </div>
+      </div>
 
      </div>
   
